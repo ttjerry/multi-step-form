@@ -1,4 +1,3 @@
-
 import Button from "../components/button";
 
 const SelectPlan = ({
@@ -32,7 +31,7 @@ const SelectPlan = ({
                 } h-48 border-[1px] rounded-md flex flex-col justify-between cursor-pointer`}
                 onClick={() => setSelected(el.id)}
               >
-                <img src={el.image} alt={index} className="w-fit" />
+                <img src={el?.image} alt={index} className="w-fit" />
                 <div className="flex flex-col">
                   <span className="font-semiBold text-blue-950">{el.name}</span>
                   <span className="text-gray-400">

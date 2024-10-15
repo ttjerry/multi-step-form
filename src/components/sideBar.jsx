@@ -1,7 +1,11 @@
 const Sidebar = ({ children }) => {
   return (
     <div className="w-[35%] relative">
-      <img src="/public/bg-sidebar-desktop.svg" alt="ded" className="w-full" />
+      <img
+        src="../../public/bg-sidebar-desktop.svg"
+        alt="ded"
+        className="w-full"
+      />
       <div className="absolute mt-6 top-0">{children}</div>
     </div>
   );

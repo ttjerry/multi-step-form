@@ -12,25 +12,25 @@ const data = [
 ];
 const Layout = () => {
   const [num, setNum] = useState(1);
-  const [cards, setCards] = useState([
+  const [cards] = useState([
     {
       id: 1,
       name: "Arcade",
-      image: "/public/icon-arcade.svg",
+      image: "../public/icon-arcade.svg",
       price: 30,
       duration: 2,
     },
     {
       id: 2,
       name: "Advanced",
-      image: "/public/icon-advanced.svg",
+      image: "../public/icon-advanced.svg",
       price: 120,
       duration: 2,
     },
     {
       id: 3,
       name: "Pro",
-      image: "/public/icon-pro.svg",
+      image: "../public/icon-pro.svg",
       price: 150,
       duration: 2,
     },
@@ -38,13 +38,14 @@ const Layout = () => {
   const [selected, setSelected] = useState(1);
   const [monthly, setMonthly] = useState(false);
 
-  const updatedUser = cards.map((el) => {
+  cards.map((el) => {
     if (monthly == true) {
       return { ...el, price: el.price.toString().slice(0, -1) };
     } else {
       return { ...el };
     }
   });
+
   return (
     <div className="flex justify-center h-screen items-center">
       <div className="flex justify-between bg-white p-2 pr-5 rounded-xl w-7/12">
@@ -89,7 +90,7 @@ const Layout = () => {
               selected={selected}
               setSelected={setSelected}
               setNum={setNum}
-              updatedUser={updatedUser}
+              updatedUser={cards}
             />
           ) : (
             false
