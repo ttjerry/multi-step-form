@@ -1,45 +1,55 @@
 import Sidebar from "./components/sideBar";
 import { useState } from "react";
-import First from "./pages/first";
+import FormPage from "./pages/formPage";
 import SelectPlan from "./pages/selectPlan";
 import AddOns from "./pages/add-ons";
+import Summary from "./pages/summary";
 
+// dummy data for sidebar
 const data = [
   { number: 1, step: "STEP 1", details: "YOUR INFO", isSelected: true },
   { number: 2, step: "STEP 2", details: "SELECT PLAN", isSelected: false },
   { number: 3, step: "STEP 3", details: "ADD-ONS", isSelected: false },
   { number: 4, step: "STEP 4", details: "SUMMARY", isSelected: false },
 ];
+
 const Layout = () => {
+  //handle dynamic form contents
   const [num, setNum] = useState(1);
+  //handle selected card in step 2
+  const [selected, setSelected] = useState(1);
+  //handle selected subscription plan in step 2
+  const [monthly, setMonthly] = useState(false);
+
   const [cards] = useState([
     {
       id: 1,
       name: "Arcade",
-      image: "../public/icon-arcade.svg",
+      image: "/icon-arcade.svg",
       price: 30,
       duration: 2,
     },
     {
       id: 2,
       name: "Advanced",
-      image: "../public/icon-advanced.svg",
+      image: "/icon-advanced.svg",
       price: 120,
       duration: 2,
     },
     {
       id: 3,
       name: "Pro",
-      image: "../public/icon-pro.svg",
+      image: "/icon-pro.svg",
       price: 150,
       duration: 2,
     },
   ]);
-  const [selected, setSelected] = useState(1);
-  const [monthly, setMonthly] = useState(false);
 
+  const [summary, setSummary] = useState("");
+
+  // handle toggle between monthly and yearly subscription
   cards.map((el) => {
-    if (monthly == true) {
+    if (monthly) {
       return { ...el, price: el.price.toString().slice(0, -1) };
     } else {
       return { ...el };
@@ -48,7 +58,7 @@ const Layout = () => {
 
   return (
     <div className="flex justify-center h-screen items-center">
-      <div className="flex justify-between bg-white p-2 pr-5 rounded-xl w-7/12">
+      <div className="flex justify-between bg-white p-2 pr-5 rounded-xl w-8/12">
         <Sidebar>
           {data.map((el, index) => {
             return (
@@ -70,20 +80,17 @@ const Layout = () => {
             );
           })}
         </Sidebar>
-        <div className="w-[65%]">
-          {num == 1 ? (
-            <First
+        <div className="w-[80%]">
+          {/* dynamic content for form page */}
+          {num == 1 && (
+            <FormPage
               num={num}
               setNum={setNum}
-              className="p-12 flex flex-col gap-10"
-            >
-              {/* children */}
-              {/* after proper validation and onclick of the button setNum as 2 */}
-            </First>
-          ) : (
-            false
+              className="p-11 flex flex-col gap-10"
+            />
           )}
-          {num == 2 ? (
+          {/* dynamic content for select plan page */}
+          {num == 2 && (
             <SelectPlan
               monthly={monthly}
               setMonthly={setMonthly}
@@ -91,21 +98,14 @@ const Layout = () => {
               setSelected={setSelected}
               setNum={setNum}
               updatedUser={cards}
+              setSummary={setSummary}
             />
-          ) : (
-            false
           )}
-          {num == 3 ? <AddOns /> : false}
-          {num == 4 ? (
-            <First
-              num={num}
-              setNum={setNum}
-              className="p-12 flex flex-col gap-10"
-            >
-              {/* children */}
-            </First>
-          ) : (
-            false
+          {/* dynamic content for add-ons page */}
+          {num == 3 && <AddOns monthly={monthly} setNum={setNum} />}
+
+          {num == 4 && (
+            <Summary monthly={monthly} setNum={setNum} summary={summary} />
           )}
         </div>
       </div>

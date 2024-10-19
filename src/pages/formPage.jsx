@@ -1,7 +1,7 @@
 import CustomInput from "../components/customInput";
 import Button from "../components/button";
 
-const First = ({ className, num, setNum }) => {
+const FormPage = ({ className, setNum }) => {
   const handleEvent = (e) => {
     e.preventDefault();
     setNum(2);
@@ -31,7 +31,7 @@ const First = ({ className, num, setNum }) => {
           className="border-[1px] text-sm w-full p-3 rounded-md"
         />
       </div>
-      <div className="flex justify-end">
+      <div className="flex mt-6 justify-end">
         <Button
           className="text-white bg-blue-950 p-2 px-5 rounded-md"
           handleClick={handleEvent}
@@ -43,4 +43,4 @@ const First = ({ className, num, setNum }) => {
   );
 };
 
-export default First;
+export default FormPage;

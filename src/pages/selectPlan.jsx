@@ -7,10 +7,15 @@ const SelectPlan = ({
   setSelected,
   updatedUser,
   setNum,
+  setSummary,
 }) => {
+  function handleEvent(e) {
+    setSelected(e.id);
+    setSummary(e.name);
+  }
   return (
     <div className="">
-      <div className="pl-12 pt-12 flex flex-col gap-10">
+      <div className="p-11 flex flex-col gap-10">
         <div className="flex flex-col">
           <h3 className="mb-2 font-bold text-blue-950 text-3xl">
             Select your plan
@@ -29,7 +34,7 @@ const SelectPlan = ({
                 } ${
                   monthly ? "p-9" : "p-6"
                 } h-48 border-[1px] rounded-md flex flex-col justify-between cursor-pointer`}
-                onClick={() => setSelected(el.id)}
+                onClick={() => handleEvent(el)}
               >
                 <img src={el?.image} alt={index} className="w-fit" />
                 <div className="flex flex-col">
