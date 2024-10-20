@@ -13,44 +13,66 @@ const data = [
   { number: 4, step: "STEP 4", details: "SUMMARY", isSelected: false },
 ];
 
+//data for select plan cards
+const cards = [
+  {
+    id: 1,
+    name: "Arcade",
+    image: "/icon-arcade.svg",
+    price: 90,
+    duration: 2,
+  },
+  {
+    id: 2,
+    name: "Advanced",
+    image: "/icon-advanced.svg",
+    price: 120,
+    duration: 2,
+  },
+  {
+    id: 3,
+    name: "Pro",
+    image: "/icon-pro.svg",
+    price: 150,
+    duration: 2,
+  },
+];
+//dummy data for add-ons page
+const addOns = [
+  {
+    tag: "Online service",
+    tagDetails: "Access to multiplayer games",
+    pricing: 1,
+  },
+  {
+    tag: "Larger storage",
+    tagDetails: "Extra 1TB of cloud save",
+    pricing: 2,
+  },
+  {
+    tag: "Customizable profile",
+    tagDetails: "Custom theme on your profile",
+    pricing: 2,
+  },
+];
+
 const Layout = () => {
-  //handle dynamic form contents
+  //state to handle which page to display
   const [num, setNum] = useState(1);
   //handle selected card in step 2
   const [selected, setSelected] = useState(1);
   //handle selected subscription plan in step 2
   const [monthly, setMonthly] = useState(false);
-
-  const [cards] = useState([
-    {
-      id: 1,
-      name: "Arcade",
-      image: "/icon-arcade.svg",
-      price: 90,
-      duration: 2,
-    },
-    {
-      id: 2,
-      name: "Advanced",
-      image: "/icon-advanced.svg",
-      price: 120,
-      duration: 2,
-    },
-    {
-      id: 3,
-      name: "Pro",
-      image: "/icon-pro.svg",
-      price: 150,
-      duration: 2,
-    },
-  ]);
-
+  //handle selected add-ons in step 3
+  const [plans, setPlans] = useState([]);
+  //selected add-ons summary on step 4
   const [summary, setSummary] = useState("Arcade");
-  const [price, setPrice] = useState(0);
+  //selected price on summary page
+  const [price, setPrice] = useState(90);
 
   return (
     <div className="flex justify-center h-screen items-center">
-      <div className="flex justify-between bg-white p-2 pr-5 rounded-xl w-8/12">
+      <div className="flex justify-between bg-white rounded-xl p-3 w-8/12 h-auto">
         <Sidebar>
           {data.map((el, index) => {
             return (
@@ -78,7 +100,7 @@ const Layout = () => {
             <FormPage
               num={num}
               setNum={setNum}
-              className="p-11 flex flex-col gap-10"
+              className="p-12 flex flex-col justify-between h-full"
             />
           )}
           {/* dynamic content for select plan page */}
@@ -95,13 +117,21 @@ const Layout = () => {
             />
           )}
           {/* dynamic content for add-ons page */}
-          {num == 3 && <AddOns monthly={monthly} setNum={setNum} />}
-
+          {num == 3 && (
+            <AddOns
+              monthly={monthly}
+              addOns={addOns}
+              setPlans={setPlans}
+              setNum={setNum}
+            />
+          )}
+          {/* dynamic content for summary page */}
           {num == 4 && (
             <Summary
               monthly={monthly}
               setNum={setNum}
               price={price}
+              plans={plans}
               summary={summary}
             />
           )}

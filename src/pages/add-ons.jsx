@@ -2,53 +2,48 @@ import { useState } from "react";
 import CustomInput from "../components/customInput";
 import Button from "../components/button";
 
-const AddOns = ({ monthly, setNum }) => {
+const AddOns = ({ monthly, addOns, setNum }) => {
+  const followUp = addOns.map((element) => {
+    if (monthly === true) {
+      return { ...element };
+    } else {
+      return { ...element, pricing: element.pricing.toString().concat("0") };
+    }
+  });
   return (
-    <div>
-      <div className="p-9 flex flex-col gap-10">
-        <div className="flex flex-col">
-          <h3 className="mb-2 font-bold text-blue-950 text-3xl">
-            Pick add-ons
-          </h3>
-          <h3 className="font-normal text-gray-400">
-            Add-ons help enhance your gaming experience.
-          </h3>
-        </div>
-        <div className="flex flex-col gap-4">
-          <CustomAddOns
-            tag="Online service"
-            tagDetails="Access to multiplayer games"
-            pricing={monthly ? 1 : 10}
-            monthly={monthly}
-          />
-          <CustomAddOns
-            tag="Larger storage"
-            tagDetails="Extra 1TB of cloud save"
-            pricing={monthly ? 2 : 20}
-            monthly={monthly}
-          />
-          <CustomAddOns
-            tag="Customizable profile"
-            tagDetails="Custom theme on your profile"
-            pricing={monthly ? 2 : 20}
-            monthly={monthly}
-          />
-        </div>
-        {/* navigation */}
-        <div className="flex items-center justify-between w-full h-10">
-          <Button
-            className="text-gray-400 font-medium"
-            handleClick={() => setNum(2)}
-          >
-            Go Back
-          </Button>
-          <Button
-            className="bg-blue-950 p-2 px-6 text-white rounded-md"
-            handleClick={() => setNum(4)}
-          >
-            Next Step
-          </Button>
-        </div>
+    <div className="p-12 flex flex-col justify-between h-full">
+      <div className="flex flex-col">
+        <h3 className="mb-2 font-bold text-blue-950 text-3xl">Pick add-ons</h3>
+        <h3 className="font-normal text-gray-400">
+          Add-ons help enhance your gaming experience.
+        </h3>
+      </div>
+      <div className="flex flex-col gap-4">
+        {followUp.map((el) => {
+          return (
+            <CustomAddOns
+              tag={el?.tag}
+              tagDetails={el?.tagDetails}
+              pricing={el?.pricing}
+              monthly={monthly}
+            />
+          );
+        })}
+      </div>
+      {/* navigation */}
+      <div className="flex items-center justify-between w-full h-10">
+        <Button
+          className="text-gray-400 font-medium"
+          handleClick={() => setNum(2)}
+        >
+          Go Back
+        </Button>
+        <Button
+          className="bg-blue-950 p-2 px-6 text-white rounded-md"
+          handleClick={() => setNum(4)}
+        >
+          Next Step
+        </Button>
       </div>
     </div>
   );

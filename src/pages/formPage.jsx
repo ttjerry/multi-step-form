@@ -33,7 +33,7 @@ const FormPage = ({ className, setNum }) => {
       </div>
       <div className="flex mt-6 justify-end">
         <Button
-          className="text-white bg-blue-950 p-2 px-5 rounded-md"
+          className="text-white bg-blue-950 p-2 px-6 rounded-md"
           handleClick={handleEvent}
         >
           Next Step
