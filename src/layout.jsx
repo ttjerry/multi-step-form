@@ -26,7 +26,7 @@ const Layout = () => {
       id: 1,
       name: "Arcade",
       image: "/icon-arcade.svg",
-      price: 30,
+      price: 90,
       duration: 2,
     },
     {
@@ -45,16 +45,8 @@ const Layout = () => {
     },
   ]);
 
-  const [summary, setSummary] = useState("");
-
-  // handle toggle between monthly and yearly subscription
-  cards.map((el) => {
-    if (monthly) {
-      return { ...el, price: el.price.toString().slice(0, -1) };
-    } else {
-      return { ...el };
-    }
-  });
+  const [summary, setSummary] = useState("Arcade");
+  const [price, setPrice] = useState(0);
 
   return (
     <div className="flex justify-center h-screen items-center">
@@ -99,13 +91,19 @@ const Layout = () => {
               setNum={setNum}
               updatedUser={cards}
               setSummary={setSummary}
+              setPrice={setPrice}
             />
           )}
           {/* dynamic content for add-ons page */}
           {num == 3 && <AddOns monthly={monthly} setNum={setNum} />}
 
           {num == 4 && (
-            <Summary monthly={monthly} setNum={setNum} summary={summary} />
+            <Summary
+              monthly={monthly}
+              setNum={setNum}
+              price={price}
+              summary={summary}
+            />
           )}
         </div>
       </div>

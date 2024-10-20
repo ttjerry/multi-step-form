@@ -1,6 +1,6 @@
 import Button from "../components/button";
 
-const Summary = ({ setNum, summary, monthly }) => {
+const Summary = ({ setNum, summary, price, monthly }) => {
   return (
     <div>
       <div className="p-11 flex flex-col gap-10">
@@ -23,7 +23,9 @@ const Summary = ({ setNum, summary, monthly }) => {
                 <Button className="underline w-fit" children="Change" />
               </div>
               {/* plan price */}
-              <span>{"9"}/mo</span>
+              <span>
+                {price} / {monthly ? "mo" : "yr"}
+              </span>
             </div>
           </div>
           <hr />

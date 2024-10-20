@@ -8,10 +8,25 @@ const SelectPlan = ({
   updatedUser,
   setNum,
   setSummary,
+  setPrice,
 }) => {
   function handleEvent(e) {
     setSelected(e.id);
     setSummary(e.name);
+    setPrice(e.price);
+  }
+
+  // handle toggle between monthly and yearly subscription
+  const mutatedData = updatedUser.map((el) => {
+    if (monthly) {
+      return { ...el, price: el.price.toString().slice(0, -1) };
+    } else {
+      return { ...el };
+    }
+  });
+
+  function handleToggle() {
+    setMonthly(!monthly);
   }
   return (
     <div className="">
@@ -25,7 +40,7 @@ const SelectPlan = ({
           </h3>
         </div>
         <div className="flex gap-4">
-          {updatedUser.map((el, index) => {
+          {mutatedData.map((el, index) => {
             return (
               <div
                 key={index}
@@ -67,7 +82,7 @@ const SelectPlan = ({
             </span>
             <button
               className="w-14 h-6 rounded-full flex items-center relative bg-blue-950"
-              onClick={() => setMonthly(!monthly)}
+              onClick={handleToggle}
             >
               <span
                 className={`${
