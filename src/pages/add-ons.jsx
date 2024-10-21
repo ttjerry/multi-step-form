@@ -1,8 +1,27 @@
 import { useState } from "react";
 import CustomInput from "../components/customInput";
-import Button from "../components/button";
+import CustomButton from "../components/CustomButton";
 
-const AddOns = ({ monthly, addOns, setNum }) => {
+//dummy data for add-ons page
+const addOns = [
+  {
+    tag: "Online service",
+    tagDetails: "Access to multiplayer games",
+    pricing: 1,
+  },
+  {
+    tag: "Larger storage",
+    tagDetails: "Extra 1TB of cloud save",
+    pricing: 2,
+  },
+  {
+    tag: "Customizable profile",
+    tagDetails: "Custom theme on your profile",
+    pricing: 2,
+  },
+];
+
+const AddOns = ({ monthly, plans, setPlans, setNum }) => {
   const followUp = addOns.map((element) => {
     if (monthly === true) {
       return { ...element };
@@ -26,24 +45,26 @@ const AddOns = ({ monthly, addOns, setNum }) => {
               tagDetails={el?.tagDetails}
               pricing={el?.pricing}
               monthly={monthly}
+              plans={plans}
+              setPlans={setPlans}
             />
           );
         })}
       </div>
       {/* navigation */}
       <div className="flex items-center justify-between w-full h-10">
-        <Button
+        <CustomButton
           className="text-gray-400 font-medium"
           handleClick={() => setNum(2)}
         >
           Go Back
-        </Button>
-        <Button
+        </CustomButton>
+        <CustomButton
           className="bg-blue-950 p-2 px-6 text-white rounded-md"
           handleClick={() => setNum(4)}
         >
           Next Step
-        </Button>
+        </CustomButton>
       </div>
     </div>
   );
@@ -51,8 +72,25 @@ const AddOns = ({ monthly, addOns, setNum }) => {
 
 export default AddOns;
 
-const CustomAddOns = ({ tag, tagDetails, pricing, monthly }) => {
+const CustomAddOns = ({
+  tag,
+  tagDetails,
+  plans,
+  setPlans,
+  pricing,
+  monthly,
+}) => {
   const [isChecked, setIsChecked] = useState(false);
+
+  const selectedAddOns = {
+    tag: tag,
+    pricing: pricing,
+  };
+
+  // if (isChecked === true) {
+  //   setPlans([...plans, selectedAddOns]);
+  // }
+
   return (
     <div
       className={`${

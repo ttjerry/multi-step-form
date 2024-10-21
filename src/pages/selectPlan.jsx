@@ -1,4 +1,4 @@
-import Button from "../components/button";
+import CustomButton from "../components/CustomButton";
 
 const SelectPlan = ({
   monthly,
@@ -79,7 +79,7 @@ const SelectPlan = ({
           >
             Monthly
           </span>
-          <button
+          <CustomButton
             className="w-14 h-6 rounded-full flex items-center relative bg-blue-950"
             onClick={handleToggle}
           >
@@ -88,7 +88,7 @@ const SelectPlan = ({
                 monthly ? "left-0" : "right-0"
               } bg-white mx-1 absolute  w-4 h-4 rounded-full`}
             ></span>
-          </button>
+          </CustomButton>
           <span
             className={`${
               monthly ? "text-gray-400" : "text-blue-950"
@@ -101,18 +101,18 @@ const SelectPlan = ({
       <div>
         {/* navigation */}
         <div className="flex items-center justify-between w-full h-10">
-          <Button
+          <CustomButton
             className="text-gray-400 font-medium"
             handleClick={() => setNum(1)}
           >
             Go Back
-          </Button>
-          <Button
+          </CustomButton>
+          <CustomButton
             className="bg-blue-950 p-2 px-6 text-white rounded-md"
             handleClick={() => setNum(3)}
           >
             Next Step
-          </Button>
+          </CustomButton>
         </div>
       </div>
     </div>

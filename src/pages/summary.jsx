@@ -1,8 +1,8 @@
 import { useState } from "react";
-import Button from "../components/button";
+import CustomButton from "../components/CustomButton";
 
 const Summary = ({ setNum, summary, plans, price, monthly }) => {
-  
+  const selectedAddOns = plans;
 
   return (
     <div className="p-12 h-full flex flex-col justify-between">
@@ -20,7 +20,7 @@ const Summary = ({ setNum, summary, plans, price, monthly }) => {
               <span className="font-bold text-blue-950">
                 {summary}({monthly ? "monthly" : "yearly"})
               </span>
-              <Button
+              <CustomButton
                 className="underline w-fit text-gray-400 text-sm"
                 children="Change"
               />
@@ -33,11 +33,13 @@ const Summary = ({ setNum, summary, plans, price, monthly }) => {
         </div>
         <hr />
         <div className="flex flex-col gap-2 pt-4">
-          {plans.map((element) => {
+          {selectedAddOns.map((element) => {
             return (
               <div className="flex justify-between">
                 <span className="text-gray-400">{element.tag}</span>
-                <span className="text-blue-950 text-sm font-medium">{element.pricing}</span>
+                <span className="text-blue-950 text-sm font-medium">
+                  {element.pricing}
+                </span>
               </div>
             );
           })}
@@ -49,18 +51,18 @@ const Summary = ({ setNum, summary, plans, price, monthly }) => {
       </div>
       {/* navigation */}
       <div className="flex items-center justify-between w-full h-10">
-        <Button
+        <CustomButton
           className="text-gray-400 font-medium"
           handleClick={() => setNum(3)}
         >
           Go Back
-        </Button>
-        <Button
+        </CustomButton>
+        <CustomButton
           className="bg-blue-700 p-2 px-7 text-white rounded-md"
           handleClick={() => setNum(1)}
         >
           Confirm
-        </Button>
+        </CustomButton>
       </div>
     </div>
   );

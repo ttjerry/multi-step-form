@@ -37,25 +37,6 @@ const cards = [
     duration: 2,
   },
 ];
-//dummy data for add-ons page
-const addOns = [
-  {
-    tag: "Online service",
-    tagDetails: "Access to multiplayer games",
-    pricing: 1,
-  },
-  {
-    tag: "Larger storage",
-    tagDetails: "Extra 1TB of cloud save",
-    pricing: 2,
-  },
-  {
-    tag: "Customizable profile",
-    tagDetails: "Custom theme on your profile",
-    pricing: 2,
-  },
-];
-
 const Layout = () => {
   //state to handle which page to display
   const [num, setNum] = useState(1);
@@ -120,7 +101,7 @@ const Layout = () => {
           {num == 3 && (
             <AddOns
               monthly={monthly}
-              addOns={addOns}
+              plans={plans}
               setPlans={setPlans}
               setNum={setNum}
             />

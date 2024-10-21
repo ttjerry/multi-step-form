@@ -1,5 +1,5 @@
 import CustomInput from "../components/customInput";
-import Button from "../components/button";
+import CustomButton from "../components/CustomButton";
 
 const FormPage = ({ className, setNum }) => {
   const handleEvent = (e) => {
@@ -32,12 +32,12 @@ const FormPage = ({ className, setNum }) => {
         />
       </div>
       <div className="flex mt-6 justify-end">
-        <Button
+        <CustomButton
           className="text-white bg-blue-950 p-2 px-6 rounded-md"
           handleClick={handleEvent}
         >
           Next Step
-        </Button>
+        </CustomButton>
       </div>
     </form>
   );

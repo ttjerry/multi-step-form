@@ -1,4 +1,4 @@
-const Button = ({ children, handleClick, className }) => {
+const CustomButton = ({ children, handleClick, className }) => {
   return (
     <button className={`${className}`} onClick={handleClick}>
       {children}
@@ -6,4 +6,4 @@ const Button = ({ children, handleClick, className }) => {
   );
 };
 
-export default Button;
+export default CustomButton;
