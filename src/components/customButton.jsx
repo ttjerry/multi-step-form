@@ -4,6 +4,6 @@ const CustomButton = ({ children, handleClick, className }) => {
       {children}
     </button>
   );
-};
+}
 
 export default CustomButton;
