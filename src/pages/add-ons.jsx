@@ -1,27 +1,39 @@
-import { useState } from "react";
+/* eslint-disable react/prop-types */
 import CustomInput from "../components/customInput";
 import CustomButton from "../components/CustomButton";
+import { useState } from "react";
 
 //dummy data for add-ons page
 const addOns = [
   {
+    id: 1,
     tag: "Online service",
     tagDetails: "Access to multiplayer games",
     pricing: 1,
   },
   {
+    id: 2,
     tag: "Larger storage",
     tagDetails: "Extra 1TB of cloud save",
     pricing: 2,
   },
   {
+    id: 3,
     tag: "Customizable profile",
     tagDetails: "Custom theme on your profile",
     pricing: 2,
   },
 ];
 
-const AddOns = ({ monthly, plans, setPlans, setNum }) => {
+const AddOns = ({
+  monthly,
+  plans,
+  handleNewPlans,
+  isChecked,
+  setIsChecked,
+  num,
+  setNum,
+}) => {
   const followUp = addOns.map((element) => {
     if (monthly === true) {
       return { ...element };
@@ -29,6 +41,8 @@ const AddOns = ({ monthly, plans, setPlans, setNum }) => {
       return { ...element, pricing: element.pricing.toString().concat("0") };
     }
   });
+  const [isActive, setActive] = useState("");
+  // const [num, setNumber] = useState(0);
   return (
     <div className="p-12 flex flex-col justify-between h-full">
       <div className="flex flex-col">
@@ -38,15 +52,22 @@ const AddOns = ({ monthly, plans, setPlans, setNum }) => {
         </h3>
       </div>
       <div className="flex flex-col gap-4">
-        {followUp.map((el) => {
+        {followUp.map((el, index) => {
           return (
             <CustomAddOns
               tag={el?.tag}
               tagDetails={el?.tagDetails}
               pricing={el?.pricing}
+              id={el.id}
+              key={index}
               monthly={monthly}
+              handleNewPlans={handleNewPlans}
               plans={plans}
-              setPlans={setPlans}
+              num={num}
+              setNum={setNum}
+              setActive={setActive}
+              isChecked={isChecked}
+              setIsChecked={setIsChecked}
             />
           );
         })}
@@ -75,38 +96,38 @@ export default AddOns;
 const CustomAddOns = ({
   tag,
   tagDetails,
-  plans,
-  setPlans,
+  handleNewPlans,
+  id,
+  setActive,
   pricing,
   monthly,
+  isChecked,
+  setIsChecked,
 }) => {
-  const [isChecked, setIsChecked] = useState(false);
+  //function to hanldle check event
 
-  const selectedAddOns = {
-    tag: tag,
-    pricing: pricing,
+  const handleValueChange = () => {
+    handleNewPlans(tag, pricing, isChecked);
+    // setNum(id);
+    setIsChecked(!isChecked);
+    alert(tag);
   };
-
-  // if (isChecked === true) {
-  //   setPlans([...plans, selectedAddOns]);
-  // }
 
   return (
     <div
       className={`${
         isChecked && " bg-blue-100 border-blue-600"
       } flex justify-between items-center w-full p-5 rounded-md border-[1px]`}
+      key={id}
     >
       <div className="flex gap-6 items-center">
         <CustomInput
           type="checkbox"
           checked={isChecked}
-          onValueChange={() => {
-            setIsChecked(!isChecked);
-          }}
+          onValueChange={handleValueChange}
         />
         <div className="flex flex-col">
-          {/* add ons details */}
+          {/* Add-ons details */}
           <span className={`${isChecked && "text-blue-950"} font-semibold`}>
             {tag}
           </span>
@@ -115,7 +136,7 @@ const CustomAddOns = ({
       </div>
 
       <div>
-        {/* pricing */}
+        {/* Pricing */}
         <span className="text-sm font-medium text-blue-900">
           +${pricing}/{monthly ? "mo" : "yr"}
         </span>

@@ -50,6 +50,24 @@ const Layout = () => {
   const [summary, setSummary] = useState("Arcade");
   //selected price on summary page
   const [price, setPrice] = useState(90);
+  //checked state for add-ons component
+  const [isChecked, setIsChecked] = useState(false);
+
+  //function to update plans array
+  function handleNewPlans(a, b, c) {
+    const selectedAddOns = {
+      tag: a,
+      pricing: b,
+    };
+    console.log(plans);
+    // setCheckedValue(b);
+    if (!c) {
+      // plans.push(selectedAddOns);
+      setPlans([...plans, selectedAddOns]);
+    } else {
+      setPlans([]);
+    }
+  }
 
   return (
     <div className="flex justify-center h-screen items-center">
@@ -102,8 +120,10 @@ const Layout = () => {
             <AddOns
               monthly={monthly}
               plans={plans}
-              setPlans={setPlans}
+              handleNewPlans={handleNewPlans}
               setNum={setNum}
+              isChecked={isChecked}
+              setIsChecked={setIsChecked}
             />
           )}
           {/* dynamic content for summary page */}

@@ -81,12 +81,12 @@ const SelectPlan = ({
           </span>
           <CustomButton
             className="w-14 h-6 rounded-full flex items-center relative bg-blue-950"
-            onClick={handleToggle}
+            handleClick={handleToggle}
           >
             <span
-              className={`${
+              className={`absolute ${
                 monthly ? "left-0" : "right-0"
-              } bg-white mx-1 absolute  w-4 h-4 rounded-full`}
+              } bg-white mx-1 w-4 h-4 rounded-full`}
             ></span>
           </CustomButton>
           <span

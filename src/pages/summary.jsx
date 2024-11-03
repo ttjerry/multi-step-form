@@ -1,8 +1,8 @@
-import { useState } from "react";
+/* eslint-disable react/prop-types */
 import CustomButton from "../components/CustomButton";
 
 const Summary = ({ setNum, summary, plans, price, monthly }) => {
-  const selectedAddOns = plans;
+  console.log(plans);
 
   return (
     <div className="p-12 h-full flex flex-col justify-between">
@@ -20,10 +20,9 @@ const Summary = ({ setNum, summary, plans, price, monthly }) => {
               <span className="font-bold text-blue-950">
                 {summary}({monthly ? "monthly" : "yearly"})
               </span>
-              <CustomButton
-                className="underline w-fit text-gray-400 text-sm"
-                children="Change"
-              />
+              <CustomButton className="underline w-fit text-gray-400 text-sm">
+                Change
+              </CustomButton>
             </div>
             {/* plan price */}
             <span className=" font-semibold text-blue-950">
@@ -33,9 +32,9 @@ const Summary = ({ setNum, summary, plans, price, monthly }) => {
         </div>
         <hr />
         <div className="flex flex-col gap-2 pt-4">
-          {selectedAddOns.map((element) => {
+          {plans.map((element, index) => {
             return (
-              <div className="flex justify-between">
+              <div className="flex justify-between" key={index}>
                 <span className="text-gray-400">{element.tag}</span>
                 <span className="text-blue-950 text-sm font-medium">
                   {element.pricing}
